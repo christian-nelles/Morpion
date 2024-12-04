@@ -1,14 +1,13 @@
 def afficher_grille(grille):
-    for ligne in grille:
+    for i, ligne in enumerate(grille):
         print("|".join(ligne))
-        print("-" * 5)
+        if i < 2:  
+            print("-" * 5)
 
 def verifier_victoire(grille, joueur):
-    # Vérifier les lignes
     for ligne in grille:
         if all(s == joueur for s in ligne):
             return True
-    # Vérifier les colonnes
     for col in range(3):
         if all(grille[ligne][col] == joueur for ligne in range(3)):
             return True
@@ -20,13 +19,11 @@ def verifier_victoire(grille, joueur):
     return False
 
 def jeu_morpion():
-    # Initialiser la grille de jeu
     grille = [[" " for _ in range(3)] for _ in range(3)]
     joueur_actuel = "X"
     tours = 0
 
     while tours < 9:
-        # Afficher la grille actuelle
         afficher_grille(grille)
         try:
             ligne = int(input(f"Joueur {joueur_actuel}, entrez la ligne (0, 1, 2) : "))
@@ -51,7 +48,6 @@ def jeu_morpion():
     afficher_grille(grille)
     print("Match nul!")
 
-# Lancer le jeu
 jeu_morpion()
 
 
