@@ -48,14 +48,61 @@ def victoire(symbole):
 
 #Lancer la boucle de jeu
 def partie(symbole):
+    if m == 2 and symbole == "o":
+        victoire(symbole)
+        partie_bot()
     plateau()
     jouer(symbole)
     victoire(symbole)
 
+#Choisir une case libre pour le bot selon sa difficulté
+def bot():
+    global a, b, c, d, e, f, g, h, i
+    positions_libres = [a, b, c, d, e, f, g, h, i]
+    positions_libres = [p for p in [a, b, c, d, e, f, g, h, i] if p not in [10, 11]]
+    mouvement = random.choice(positions_libres)
+    
+    if mouvement == a:
+        a = 11
+    elif mouvement == b:
+        b = 11
+    elif mouvement == c:
+        c = 11
+    elif mouvement == d:
+        d = 11
+    elif mouvement == e:
+        e = 11
+    elif mouvement == f:
+        f = 11
+    elif mouvement == g:
+        g = 11
+    elif mouvement == h:
+        h = 11
+    elif mouvement == i:
+        i = 11
 
-while True:
+#Lancer la boucle du bot
+def partie_bot():
     partie("x")
+    bot()
     partie("o")
+
+#LE DEBUT DU SCRIPT VISUEL
+
+#Choisir le bot ou pas
+reponse = {"non": 1, "Non": 1, "NON": 1, "oui": 2, "Oui": 2, "OUI": 2,}
+texte = input("Jouer avec un Bot ? ")
+m = reponse.get(texte, "Valeur non définie")
+
+#Jouer sans le bot
+if m == 1:
+    while True:
+        partie("x")
+        partie("o")
+
+#Jouer avec le bot
+if m == 2:
+    partie_bot()
 
 
 
