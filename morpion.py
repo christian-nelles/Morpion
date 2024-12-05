@@ -1,3 +1,4 @@
+import random
 def afficher_grille(grille):
     for i, ligne in enumerate(grille):
         print("|".join(ligne))
@@ -17,6 +18,12 @@ def verifier_victoire(grille, joueur):
     if all(grille[i][2 - i] == joueur for i in range(3)):
         return True
     return False
+
+
+def bot_joue(grille):
+    # Le bot choisit une case libre au hasard
+    cases_libres = [(i, j) for i in range(3) for j in range(3) if grille[i][j] == " "]
+    return random.choice(cases_libres)
 
 def jeu_morpion():
     grille = [[" " for _ in range(3)] for _ in range(3)]
