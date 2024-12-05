@@ -44,7 +44,11 @@ def victoire(symbole):
     elif a + b + c + d + e + f + g + h + i >= 94:
         plateau()
         print("match nul")
-        init()
+        if m == 2 and  difficulte == 3:
+            init()
+            partie("x")
+        else:
+            init()
 
 #Lancer la boucle de jeu
 def partie(symbole):
@@ -55,12 +59,138 @@ def partie(symbole):
     jouer(symbole)
     victoire(symbole)
 
+#Choisir la difficulté du bot 
+def choix_difficulte():
+    print("Choisissez un niveau de difficulté :")
+    print("1. Facile")
+    print("2. Moyen")
+    print("3. Difficile")
+    
+    difficulte = input("Entrez un chiffre (1, 2 ou 3): ")
+    
+    if difficulte == '1':
+        return 1  # Facile
+    elif difficulte == '2':
+        return 2  # Moyen
+    else:
+        return 3  # Difficile
+
 #Choisir une case libre pour le bot selon sa difficulté
-def bot():
+def bot(difficulte):
     global a, b, c, d, e, f, g, h, i
     positions_libres = [a, b, c, d, e, f, g, h, i]
     positions_libres = [p for p in [a, b, c, d, e, f, g, h, i] if p not in [10, 11]]
-    mouvement = random.choice(positions_libres)
+    
+    if difficulte == 1:
+        mouvement = random.choice(positions_libres)
+    
+    elif difficulte == 2:
+        if a == b and c not in [10, 11]:
+            mouvement = c
+        elif a == c and b not in [10, 11]:
+            mouvement = b
+        elif b == c and a not in [10, 11]:
+            mouvement = a
+        elif d == e and f not in [10, 11]:
+            mouvement = f
+        elif d == f and e not in [10, 11]:
+            mouvement = e
+        elif e == f and d not in [10, 11]:
+            mouvement = d
+        elif g == h and i not in [10, 11]:
+            mouvement = i
+        elif g == i and h not in [10, 11]:
+            mouvement = h
+        elif h == i and g not in [10, 11]:
+            mouvement = g
+        elif a == d and g not in [10, 11]:
+            mouvement = g
+        elif a == g and d not in [10, 11]:
+            mouvement = d
+        elif d == g and a not in [10, 11]:
+            mouvement = a
+        elif b == e and h not in [10, 11]:
+            mouvement = h
+        elif b == h and e not in [10, 11]:
+            mouvement = e
+        elif e == h and b not in [10, 11]:
+            mouvement = b
+        elif c == f and i not in [10, 11]:
+            mouvement = i
+        elif c == i and f not in [10, 11]:
+            mouvement = f
+        elif f == i and c not in [10, 11]:
+            mouvement = c
+        elif a == e and i not in [10, 11]:
+            mouvement = i
+        elif a == i and e not in [10, 11]:
+            mouvement = e
+        elif e == i and a not in [10, 11]:
+            mouvement = a
+        elif c == e and g not in [10, 11]:
+            mouvement = g
+        elif c == g and e not in [10, 11]:
+            mouvement = e
+        elif e == g and c not in [10, 11]:
+            mouvement = c
+        else:
+            mouvement = random.choice(positions_libres)
+
+    elif difficulte == 3:
+        if a == b and c not in [10, 11]:
+            mouvement = c
+        elif a == c and b not in [10, 11]:
+            mouvement = b
+        elif b == c and a not in [10, 11]:
+            mouvement = a
+        elif d == e and f not in [10, 11]:
+            mouvement = f
+        elif d == f and e not in [10, 11]:
+            mouvement = e
+        elif e == f and d not in [10, 11]:
+            mouvement = d
+        elif g == h and i not in [10, 11]:
+            mouvement = i
+        elif g == i and h not in [10, 11]:
+            mouvement = h
+        elif h == i and g not in [10, 11]:
+            mouvement = g
+        elif a == d and g not in [10, 11]:
+            mouvement = g
+        elif a == g and d not in [10, 11]:
+            mouvement = d
+        elif d == g and a not in [10, 11]:
+            mouvement = a
+        elif b == e and h not in [10, 11]:
+            mouvement = h
+        elif b == h and e not in [10, 11]:
+            mouvement = e
+        elif e == h and b not in [10, 11]:
+            mouvement = b
+        elif c == f and i not in [10, 11]:
+            mouvement = i
+        elif c == i and f not in [10, 11]:
+            mouvement = f
+        elif f == i and c not in [10, 11]:
+            mouvement = c
+        elif a == e and i not in [10, 11]:
+            mouvement = i
+        elif a == i and e not in [10, 11]:
+            mouvement = e
+        elif e == i and a not in [10, 11]:
+            mouvement = a
+        elif c == e and g not in [10, 11]:
+            mouvement = g
+        elif c == g and e not in [10, 11]:
+            mouvement = e
+        elif e == g and c not in [10, 11]:
+            mouvement = c
+        elif e not in [10, 11]:
+            mouvement = e
+        elif a not in [10, 11]:
+            mouvement = a
+        else:
+            mouvement = random.choice(positions_libres)
     
     if mouvement == a:
         a = 11
@@ -81,10 +211,14 @@ def bot():
     elif mouvement == i:
         i = 11
 
+#le boss final du morpion
+def difficile():
+    truc_pour_remplir = 0
+
 #Lancer la boucle du bot
 def partie_bot():
     partie("x")
-    bot()
+    bot(difficulte)
     partie("o")
 
 #LE DEBUT DU SCRIPT VISUEL
@@ -102,6 +236,7 @@ if m == 1:
 
 #Jouer avec le bot
 if m == 2:
+    difficulte = choix_difficulte()
     partie_bot()
 
 
